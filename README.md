@@ -29,3 +29,11 @@ make -C paho.mqtt.c
 make
 ```
 else you can follow this steps (the commits of this repository will guide you through these steps)
+```
+# make the demo directory
+mkdir uidcore-demo-c
+# cd into it
+cd uidcore-demo-c
+# and init the git repository
+git init
+```
