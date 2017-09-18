@@ -37,3 +37,13 @@ cd uidcore-demo-c
 # and init the git repository
 git init
 ```
+clone the uidcore-c library @ commit 7e6ca7...87c0ca and add it as submodule
+```
+git clone git@github.com:uniquid/uidcore-c.git
+cd uidcore-c/
+git checkout 7e6ca79743f0a61649d3c54f06abab5d9787c0ca
+git submodule init
+git submodule update --recursive
+cd ..
+git submodule add git@github.com:uniquid/uidcore-c.git
+```
