@@ -1,0 +1,3 @@
+[submodule "uidcore-c"]
+	path = uidcore-c
+	url = git@github.com:uniquid/uidcore-c.git
