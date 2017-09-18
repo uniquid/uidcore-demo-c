@@ -53,3 +53,12 @@ cp uidcore-c/example_init.c demo_init.c
 cp uidcore-c/example_provider.c demo_provider.c
 cp uidcore-c/example_user.c demo_user.c
 ```
+in this demo we will use MQTT for the transport channel and for the imprinting.<br>
+mqtt_transport.c and mqtt_transport.h provide the implementation.
+the following four functions are the interface to the engine:
+- int mqttUserWaitMsg(uint8_t **msg, size_t *len);
+- int mqttProviderWaitMsg(uint8_t **msg, size_t *len);
+- int mqttUserSendMsg(char *send_topic, char *recv_topic, uint8_t *msg, size_t size);
+- int mqttProviderSendMsg(char *send_topic, uint8_t *msg, size_t size);
+
+paho.mqtt.c library is a prerequisite
