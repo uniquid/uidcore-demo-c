@@ -47,3 +47,9 @@ git submodule update --recursive
 cd ..
 git submodule add git@github.com:uniquid/uidcore-c.git
 ```
+copy the example code from uidcore-c
+```
+cp uidcore-c/example_init.c demo_init.c
+cp uidcore-c/example_provider.c demo_provider.c
+cp uidcore-c/example_user.c demo_user.c
+```
