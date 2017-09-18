@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
+#include "mqtt_transport.h"
 
 
 
@@ -48,6 +49,9 @@ int main(void)
         close(uniq);
         snprintf(Entity_NAME, sizeof(Entity_NAME), "demo%02x%02x%02x%02x%02x",serial[0], serial[1], serial[2], serial[3], serial[4]);
     }
+    // start the mqttWorker thread
+    strncpy(mqtt_address, "tcp://appliance4.uniquid.co:1883",sizeof(mqtt_address));
+    pthread_create(&thr, NULL, mqttWorker, Entity_NAME);
 
 	// set up the URL to insight-api appliance
 	strcpy(UID_appliance, "http://explorer.uniquid.co:3001/insight-api");
