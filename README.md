@@ -100,3 +100,8 @@ Add to main() the code to manage imprinting information
 	mqttProviderSendMsg("UID/announce", (uint8_t *)imprinting, strlen(imprinting));
 	printf("%s\n", imprinting);
 ```
+Add to main() the code to start the "provider" thread
+```
+	void* service_provider(void *arg);
+	pthread_create(&thr, NULL, service_provider, NULL);
+```
