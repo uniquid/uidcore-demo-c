@@ -73,5 +73,11 @@ int main(void)
 	// to chose how to schedule the execution of UID_getContracts()
 	pthread_create(&thr, NULL, updateCache, NULL);
 
-//		...
+
+	// start the "provider" thread
+	void* service_provider(void *arg);
+	pthread_create(&thr, NULL, service_provider, NULL);
+
+#define _EVER_ ;;
+	for(_EVER_) sleep(1000);
 }
