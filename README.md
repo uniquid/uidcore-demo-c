@@ -71,3 +71,22 @@ git checkout 8f7b3a6fd18570093ff6b45e92ff0a2d97d7c60c
 cd ..
 git submodule add git@github.com:uniquid/paho.mqtt.c.git
 ```
+Add to main() the code to generate the Entity Name
+```
+	char Entity_NAME[15] = {0};
+	// generate or load the Entity Name
+    {   // try to read serial.no
+		uint8_t serial[5] = {0};
+        int uniq = open("serial.no", O_RDWR|O_CREAT, 0644);
+        if (read(uniq, serial, sizeof(serial)) != sizeof(serial)) // if we cant read userial.no generate one
+        {
+            int rnd = open("/dev/random", O_RDONLY);
+            if(read(rnd, serial, sizeof(serial)) <= 0) // if we cant read /dev/random use time for seed
+                *(int32_t *)serial = time(NULL);
+            close(rnd);
+            write(uniq, serial, sizeof(serial));
+        }
+        close(uniq);
+        snprintf(Entity_NAME, sizeof(Entity_NAME), "demo%02x%02x%02x%02x%02x",serial[0], serial[1], serial[2], serial[3], serial[4]);
+    }
+```
