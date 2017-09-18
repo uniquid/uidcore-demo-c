@@ -95,3 +95,8 @@ Add to main() the code to start the mqttWorker thread
     strncpy(mqtt_address, "tcp://appliance4.uniquid.co:1883",sizeof(mqtt_address));
     pthread_create(&thr, NULL, mqttWorker, Entity_NAME);
 ```
+Add to main() the code to manage imprinting information
+```
+	mqttProviderSendMsg("UID/announce", (uint8_t *)imprinting, strlen(imprinting));
+	printf("%s\n", imprinting);
+```
