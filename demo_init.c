@@ -58,9 +58,11 @@ int main(void)
 	// generate or load the identity
 	UID_getLocalIdentity(NULL);
 	// build the imprinting string
-	snprintf(imprinting, sizeof(imprinting), "{\"name\":\"%s\",\"xpub\":\"%s\"}", "Entity NAME", UID_getTpub());
+	snprintf(imprinting, sizeof(imprinting), "{\"name\":\"%s\",\"xpub\":\"%s\"}", Entity_NAME, UID_getTpub());
 
 //	< manage imprinting information >
+	mqttProviderSendMsg("UID/announce", (uint8_t *)imprinting, strlen(imprinting));
+	printf("%s\n", imprinting);
 
 	// start the the thread that updates the
 	// contracts cache from the block-chain
