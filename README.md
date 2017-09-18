@@ -62,3 +62,12 @@ the following four functions are the interface to the engine:
 - int mqttProviderSendMsg(char *send_topic, uint8_t *msg, size_t size);
 
 paho.mqtt.c library is a prerequisite
+
+clone the paho.mqtt.c library @ commit 8f7b3a...d7c60c and add it as submodule
+```
+git clone git@github.com:uniquid/paho.mqtt.c.git
+cd paho.mqtt.c/
+git checkout 8f7b3a6fd18570093ff6b45e92ff0a2d97d7c60c
+cd ..
+git submodule add git@github.com:uniquid/paho.mqtt.c.git
+```
