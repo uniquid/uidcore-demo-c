@@ -173,3 +173,8 @@ call RPC_request() from main()
 	void RPC_request(void);
 	for(_EVER_) RPC_request(); // perform user request
 ```
+add some debugging code to print the contracts at every update
+```
+		// just print the cache contents
+		printCache(cache);
+```

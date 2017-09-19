@@ -3,12 +3,31 @@
 #include <string.h>
 #include <fcntl.h>
 #include "mqtt_transport.h"
-
+#include "UID_utils.h"
 
 
 #include "UID_bchainBTC.h"
 #include "UID_fillCache.h"
 #include "UID_identity.h"
+
+void printCache(cache_buffer *cache)
+{
+    int i;
+    char buf[161];
+    for (i = 0; i<cache->validCacheEntries;i++) {
+        printf("[[ %s %s %s ]]\n",
+            cache->contractsCache[i].serviceProviderAddress,
+            cache->contractsCache[i].serviceUserAddress,
+            tohex((uint8_t *)&(cache->contractsCache[i].profile), 80, buf));
+    }
+    for (i = 0; i<cache->validClientEntries;i++) {
+        printf("[[ %s %s <%s> ]]\n",
+            cache->clientCache[i].serviceProviderAddress,
+            cache->clientCache[i].serviceUserAddress,
+            cache->clientCache[i].serviceProviderName);
+    }
+    printf("\n");
+}
 
 // Update Cache Thread
 // gets contracts from the BlockChain and updates the local cache
@@ -22,6 +41,9 @@ void *updateCache(void *arg)
 		ret = UID_getContracts(&cache);
 
 //		< manage cache persistence if needed >
+
+		// just print the cache contents
+		printCache(cache);
 
 		sleep(60);
 	}
