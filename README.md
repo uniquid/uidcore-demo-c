@@ -116,3 +116,12 @@ Implement the "Wait_for_Msg_from_user" and "Send_Msg_to_user" in provider code
 //		< Send_Msg_to_user(response, respsize - 1) >
 		mqttProviderSendMsg(sctx.contract.serviceUserAddress, response, respsize - 1);
 ```
+Add some error handling in the provider code
+```
+//			< manage_error(ret) >
+			printf("Error! - UID_accept_channel() return %d\n", ret);
+```
+```
+//			< manage_error(ret) >
+			printf("Error! - UID_perform_request() return %d\n", ret);
+```
