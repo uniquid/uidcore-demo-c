@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include "mqtt_transport.h"
 
 #include "UID_message.h"
 #include "UID_dispatch.h"
@@ -70,16 +71,19 @@ void* service_provider(void *arg)
 	// Provider infinite loop
 	while(1)
 	{
-		uint8_t msg[1024] = {0};
+		uint8_t *msg = NULL;
 		size_t size = 0;
 
 //		< Wait_for_Msg_from_user(msg, &size) >
+		mqttProviderWaitMsg(&msg, &size);
 
 		// create the contest for the communication (contract, identities of the peers, etc)
 		UID_ServerChannelCtx sctx;
 		uint8_t sbuffer[1024];
 		size_t ssize = sizeof(sbuffer);
 		ret = UID_accept_channel(msg, size, &sctx, sbuffer, &ssize);
+
+		free(msg);
 
 		if ( UID_MSG_OK != ret) {
 
@@ -99,6 +103,7 @@ void* service_provider(void *arg)
 		}
 
 //		< Send_Msg_to_user(response, respsize - 1) >
+		mqttProviderSendMsg(sctx.contract.serviceUserAddress, response, respsize - 1);
 
 		UID_closeServerChannel(&sctx);
 	}
