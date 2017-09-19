@@ -148,3 +148,16 @@ Implement the "Send_Msg_to_provider" and "Wait_for_Msg_from_provider" in user co
 	      .....
 	free(msg);
 ```
+Add some error handling in the user code
+```
+//			< manage_error(ret) >
+		printf("Error! - UID_createChannel(%s) return %d\n", Machine_name, ret);
+```
+```
+//			< manage_error(ret) >
+		printf("Error! - UID_formatReqMsg() return %d\n", ret);
+```
+```
+//			< manage_error(ret) >
+		printf("Error! - parse_result() return %d\n", ret);
+```
