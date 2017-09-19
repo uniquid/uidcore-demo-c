@@ -178,3 +178,18 @@ add some debugging code to print the contracts at every update
 		// just print the cache contents
 		printCache(cache);
 ```
+provide a Makefile with the following compile flags
+```
+EXTRA_CFLAGS	+= -I./uidcore-c -I./paho.mqtt.c/src/ -std=gnu99
+```
+and the following link flags
+```
+LIBS		+= -lcurl -lpthread
+EXTRA_LIBS		+= -L./uidcore-c/trezor-crypto -ltrezor-crypto
+EXTRA_LIBS		+= -L./uidcore-c -luidcore-c
+EXTRA_LIBS		+= -L./paho.mqtt.c/build/output/ -lpaho-mqtt3c
+```
+and if you want to be able to load the shared libraries from the same path of the binary add this flags:
+```
+EXTRA_LIBS		+= -Wl,-rpath='$$ORIGIN'
+```
