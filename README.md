@@ -161,3 +161,9 @@ Add some error handling in the user code
 //			< manage_error(ret) >
 		printf("Error! - parse_result() return %d\n", ret);
 ```
+use the RPC result: we just print it
+```
+//  now you have the <result> from the execution on the provider
+//  of the requested method: you can use it as you need
+	printf("RPC method %d successfully executed\nreturned <%s>\n", method, result);
+```

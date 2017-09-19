@@ -76,6 +76,7 @@ void RPC_request(void)
 
 //  now you have the <result> from the execution on the provider
 //  of the requested method: you can use it as you need
+	printf("RPC method %d successfully executed\nreturned <%s>\n", method, result);
 
 	// close the channel
 	UID_closeChannel(&ctx);
