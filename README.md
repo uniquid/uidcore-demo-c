@@ -137,3 +137,14 @@ In demo_user.c add the code to read the RPC request from the command line
 	if (3 != scanf("%" STR(UID_NAME_LENGHT) "s %d %50s", Machine_name, &method, parameter_to_the_method))
 		return; // not a valid request
 ```
+Implement the "Send_Msg_to_provider" and "Wait_for_Msg_from_provider" in user code
+```
+//		< Send_Msg_to_provider(buffer, size) >
+	mqttUserSendMsg(Machine_name, ctx.myid, buffer, size - 1);
+```
+```
+//		< Wait_for_Msg_from_provider(msg, &size) >
+	mqttUserWaitMsg(&msg, &size);
+	      .....
+	free(msg);
+```

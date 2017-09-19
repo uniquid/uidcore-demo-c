@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include "mqtt_transport.h"
 
 #include "UID_message.h"
 
@@ -52,11 +53,12 @@ void RPC_request(void)
 	}
 
 //		< Send_Msg_to_provider(buffer, size) >
+	mqttUserSendMsg(Machine_name, ctx.myid, buffer, size - 1);
 
-	uint8_t msg[1024] = {0};
-	size = sizeof(msg);
+	uint8_t *msg = NULL;
 
 //		< Wait_for_Msg_from_provider(msg, &size) >
+	mqttUserWaitMsg(&msg, &size);
 
 	// parse the received message
 	char result[1024] = "";
@@ -66,6 +68,8 @@ void RPC_request(void)
 
 		return;
 	}
+
+	free(msg);
 
 //  now you have the <result> from the execution on the provider
 //  of the requested method: you can use it as you need
