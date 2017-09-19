@@ -167,3 +167,9 @@ use the RPC result: we just print it
 //  of the requested method: you can use it as you need
 	printf("RPC method %d successfully executed\nreturned <%s>\n", method, result);
 ```
+call RPC_request() from main()
+```
+#define _EVER_ ;;
+	void RPC_request(void);
+	for(_EVER_) RPC_request(); // perform user request
+```

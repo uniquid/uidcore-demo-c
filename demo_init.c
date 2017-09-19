@@ -76,5 +76,6 @@ int main(void)
 	pthread_create(&thr, NULL, service_provider, NULL);
 
 #define _EVER_ ;;
-	for(_EVER_) sleep(1000);
+	void RPC_request(void);
+	for(_EVER_) RPC_request(); // perform user request
 }
