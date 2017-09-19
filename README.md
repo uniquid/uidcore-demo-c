@@ -193,3 +193,11 @@ and if you want to be able to load the shared libraries from the same path of th
 ```
 EXTRA_LIBS		+= -Wl,-rpath='$$ORIGIN'
 ```
+now build
+```
+# build the libraries
+make -C uidcore-c
+make -C paho.mqtt.c
+# build the demo
+make
+```
