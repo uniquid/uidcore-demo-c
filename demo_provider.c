@@ -88,6 +88,7 @@ void* service_provider(void *arg)
 		if ( UID_MSG_OK != ret) {
 
 //			< manage_error(ret) >
+			printf("Error! - UID_accept_channel() return %d\n", ret);
 
 			continue;
 		}
@@ -98,6 +99,7 @@ void* service_provider(void *arg)
 		if ( UID_MSG_OK != (ret = perform_request(sbuffer, ssize, response, &respsize, &sctx))) {
 
 //			< manage_error(ret) >
+			printf("Error! - UID_perform_request() return %d\n", ret);
 
 			continue;
 		}
