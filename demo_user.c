@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 
 #include "UID_message.h"
 
@@ -20,10 +21,19 @@ void RPC_request(void)
 {
 	int ret;
 	int method = 31;
+	char Machine_name[UID_NAME_LENGHT] = "demo0123456789";
+	char parameter_to_the_method[50] = {0};
+
+	// get the command request from stdinput
+	printf("\n\n------------ enter request (es. demo0123456789 33 {\"hello\":\"world\"} -----------------\n\n");
+	#define _STR(a) #a
+	#define STR(a) _STR(a)
+	if (3 != scanf("%" STR(UID_NAME_LENGHT) "s %d %50s", Machine_name, &method, parameter_to_the_method))
+		return; // not a valid request
 
 	// create the contest for the communication (contract, identities of the peers, etc)
 	UID_ClientChannelCtx ctx;
-	if ( UID_MSG_OK != (ret = UID_createChannel("Machine name", &ctx)) ) {
+	if ( UID_MSG_OK != (ret = UID_createChannel(Machine_name, &ctx)) ) {
 
 //			< manage_error(ret) >
 
@@ -34,7 +44,7 @@ void RPC_request(void)
 	uint8_t buffer[1024];
 	size_t size = sizeof(buffer);
 	int64_t id;
-	if ( UID_MSG_OK != (ret = UID_formatReqMsg(ctx.myid, method, "parameter to the method", buffer, &size, &id)) ) {
+	if ( UID_MSG_OK != (ret = UID_formatReqMsg(ctx.myid, method, parameter_to_the_method, buffer, &size, &id)) ) {
 
 //			< manage_error(ret) >
 

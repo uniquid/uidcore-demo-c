@@ -125,3 +125,15 @@ Add some error handling in the provider code
 //			< manage_error(ret) >
 			printf("Error! - UID_perform_request() return %d\n", ret);
 ```
+In demo_user.c add the code to read the RPC request from the command line
+```
+	char Machine_name[UID_NAME_LENGHT] = "demo0123456789";
+	char parameter_to_the_method[50] = {0};
+
+	// get the command request from stdinput
+	printf("\n\n------------ enter request (es. demo0123456789 33 {\"hello\":\"world\"} -----------------\n\n");
+	#define _STR(a) #a
+	#define STR(a) _STR(a)
+	if (3 != scanf("%" STR(UID_NAME_LENGHT) "s %d %50s", Machine_name, &method, parameter_to_the_method))
+		return; // not a valid request
+```
