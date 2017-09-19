@@ -105,3 +105,14 @@ Add to main() the code to start the "provider" thread
 	void* service_provider(void *arg);
 	pthread_create(&thr, NULL, service_provider, NULL);
 ```
+Implement the "Wait_for_Msg_from_user" and "Send_Msg_to_user" in provider code
+```
+//		< Wait_for_Msg_from_user(msg, &size) >
+		mqttProviderWaitMsg(&msg, &size);
+		      .....
+		free(msg);
+```
+```
+//		< Send_Msg_to_user(response, respsize - 1) >
+		mqttProviderSendMsg(sctx.contract.serviceUserAddress, response, respsize - 1);
+```
