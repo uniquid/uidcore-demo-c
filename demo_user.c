@@ -37,6 +37,7 @@ void RPC_request(void)
 	if ( UID_MSG_OK != (ret = UID_createChannel(Machine_name, &ctx)) ) {
 
 //			< manage_error(ret) >
+		printf("Error! - UID_createChannel(%s) return %d\n", Machine_name, ret);
 
 		return;
 	}
@@ -48,6 +49,7 @@ void RPC_request(void)
 	if ( UID_MSG_OK != (ret = UID_formatReqMsg(ctx.myid, method, parameter_to_the_method, buffer, &size, &id)) ) {
 
 //			< manage_error(ret) >
+		printf("Error! - UID_formatReqMsg() return %d\n", ret);
 
 		return;
 	}
@@ -65,6 +67,7 @@ void RPC_request(void)
 	if ( UID_MSG_OK != (ret = parse_result(msg, size, &ctx, result, sizeof(result), id))) {
 
 //			< manage_error(ret) >
+		printf("Error! - parse_result() return %d\n", ret);
 
 		return;
 	}
